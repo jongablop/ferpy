@@ -137,5 +137,89 @@ Using `fer` is really straigthforward:
 
 4. Now you can work with the Python files defined at `src`.
 
-## How to contribute
+## Examples
 
+### Basic usage: How to add some results without raw data or methods
+
+This simple example shows how to create a `Experiment` object that contains the results from a spectral and directional emissivity experiment.
+
+```
+from main_objects import Data, Result
+from experiment import Experiment
+
+temperature_axis = Data().from_dict({
+    "name": "surface_temperature",
+    "description": "temperature measurement",
+    "units": "Celsius",
+    "setpoint": 100,
+    "correct": True,
+    "axes": [],
+    "values": 104.23,
+    "standard_uncertainty": 2.2
+})
+
+angles = range(10, 90, 10)
+angle_axes = []
+
+data_dict = {
+    0: [0.85, 0.78, 0.72, 0.67, 0.63, 0.60, 0.57, 0.54, 0.51, 0.48, 0.45],
+    1: [0.82, 0.75, 0.69, 0.64, 0.60, 0.57, 0.54, 0.51, 0.48, 0.45, 0.42],
+    2: [0.88, 0.82, 0.76, 0.70, 0.65, 0.61, 0.58, 0.55, 0.52, 0.49, 0.46],
+    3: [0.79, 0.73, 0.67, 0.62, 0.58, 0.54, 0.51, 0.48, 0.45, 0.42, 0.39],
+    4: [0.76, 0.71, 0.66, 0.61, 0.57, 0.53, 0.50, 0.47, 0.44, 0.41, 0.38],
+    5: [0.92, 0.86, 0.81, 0.76, 0.72, 0.68, 0.65, 0.62, 0.59, 0.56, 0.53],
+    6: [0.70, 0.65, 0.61, 0.57, 0.54, 0.51, 0.48, 0.45, 0.42, 0.39, 0.36],
+    7: [0.81, 0.76, 0.71, 0.67, 0.63, 0.59, 0.56, 0.53, 0.50, 0.47, 0.44]
+}
+
+
+results = []
+
+for i, angle in enumerate(angles):
+
+    angle_axis = Data().from_dict(
+        {
+        "name": "angle",
+        "description": "sample orientation",
+        "units": "",
+        "setpoint": angle,
+        "correct": True,
+        "axes": [],
+        "values": angle,
+        "standard_uncertainty": 0.1
+        }
+    )
+
+    result_1 = Result(
+        name = "Spectral emissivity",
+        description = "IR emissivity (mock example)",
+        units = "",
+        values = data_dict.get(i),
+        axes = [
+            temperature_axis,
+            angle_axis,
+            Data(
+                name="spectral axis",
+                description="",
+                units="microns",
+                correct=True,
+                values=[2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0],
+            )
+        ],
+        standard_uncertainty=[0.04, 0.04, 0.04, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.02, 0.02],
+        correct = True
+    )
+
+    results.append(result_1)
+
+experiment = Experiment(
+    sample_name = "Aluminum",
+    description = """
+        Emissivity measurements were conducted on an aluminum sample at a temperature of 100°C. The sample was evaluated at 8 different angles ranging from 10 to 80 degrees. The spectral emissivity data was recorded over a range of wavelengths from 2 to 14 microns. The measurements provide insights into the sample's behavior in response to varying angles and wavelengths, contributing to our understanding of its thermal properties and potential applications.
+    """,
+    experiment_authors = ["Dr. Emily Smith"],
+    publication_bibtex = '@article{smith2023emissivity, author = "Smith, Emily", title = "Emissivity Measurements of Aluminum Samples at Different Angles and Temperatures", journal = "Journal of Thermal Analysis", volume = "45", number = "3", pages = "321-335", year = "2023" }',
+    measurement=None,
+    results = results
+)
+```
