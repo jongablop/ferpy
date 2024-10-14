@@ -38,3 +38,7 @@ pip install .
 ## Testing
 
 ## License
+
+This project is licensed under the terms of the GNU General Public License v3.0 (GPL-3.0). 
+
+You may obtain a copy of the license at [GNU.org](https://www.gnu.org/licenses/gpl-3.0.en.html).
