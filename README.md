@@ -1,4 +1,4 @@
-# fer-py
+# ferpy
 
 ## Table of Contents
 
@@ -20,13 +20,13 @@ The aim of fer is to stablish a standard way of **collecting**, **treating**, an
 You can install the package from PyPI:
 
 ```bash
-pip install fer-py
+pip install ferpy
 ```
 
 Alternatively, you can clone the repository and install locally:
 
 ```bash
-git clone https://github.com/jongablop/fer-py.git
+git clone https://github.com/jongablop/ferpy.git
 cd fer-py
 pip install .
 ```
