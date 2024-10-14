@@ -11,7 +11,7 @@
 
 ## Overview
 
-A Python implementation of `fer`: Framework for Experimental Results. Visit the main repository [here](https://github.com/jongablop/fer).
+A Python implementation of the data structure defined by `fer`: Framework for Experimental Results. Visit the main repository [here](https://github.com/jongablop/fer).
 
 The aim of fer is to stablish a standard way of **collecting**, **treating**, and **sharing** the experimental results.
 
