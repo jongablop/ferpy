@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="ferpy",
@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/jongablop/ferpy",
     license="GPL-3.0",
-    packages=['src/ferpy'],  
+    packages=find_packages(),  # Automatically find packages in the fer_py directory
     package_dir={'':'src'},
     install_requires=[],       # List any dependencies here, e.g., ["numpy", "pandas"]
     python_requires=">=3.6",   # Specify the Python versions supported
