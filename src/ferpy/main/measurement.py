@@ -8,7 +8,6 @@ from ..auxiliary.correlations import Correlations
 from ..auxiliary.state import State
 
 from .quantity_values import QuantityValues
-from .source import Source
 
 @dataclass
 class Measurement:
@@ -23,12 +22,17 @@ class Measurement:
     results: List[QuantityValues] = None
     correlations: Optional[Correlations] = None
     measurands: Optional[List[str]] = None
-    source: Source = None
+    source: Optional["Source"] = None # Use forward reference for Source
 
     def __post_init__(self):
         """Generates a UUID for the id field if it's not provided."""
         if self.id is None:
             self.id = str(uuid.uuid4())
+
+        # Delay the import of Source until the object is fully initialized
+        if isinstance(self.source, dict):
+            from .source import Source
+            self.source = Source(**self.source)
 
     def to_dict(self):
         return {
