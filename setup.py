@@ -11,7 +11,7 @@ setup(
     url="https://github.com/jongablop/ferpy",
     license="GPL-3.0",
     packages=['src/ferpy'],  
-    package_dir={'':'src'}
+    package_dir={'':'src'},
     install_requires=[],       # List any dependencies here, e.g., ["numpy", "pandas"]
     python_requires=">=3.6",   # Specify the Python versions supported
     classifiers=[
