@@ -24,10 +24,12 @@ class QuantityValues:
     probability_density_functions: Optional[List[ProbabilityDensityFunction]] = None
     correlation_indices: Optional[List[int]] = None
 
+
     def __post_init__(self):
         """Generates a UUID for the id field if it's not provided."""
         if self.id is None:
             self.id = str(uuid.uuid4())
+
 
     def to_dict(self):
         return {
@@ -46,6 +48,7 @@ class QuantityValues:
             ] if self.probability_density_functions else None,
             "correlation_indices": self.correlation_indices,
         }
+
 
     @classmethod
     def from_dict(cls, data: dict):
@@ -66,3 +69,30 @@ class QuantityValues:
             ],
             correlation_indices=data.get("correlation_indices")
         )
+
+
+    def set_values(self, quantity_name, values):
+
+        index = self.quantities.index(quantity_name)
+    
+        # Ensure self.values is extended to the required length
+        if len(self.values) <= index:
+            self.values.extend([[]] * (index + 1 - len(self.values)))
+        
+        # Set the values at the desired index
+        self.values[index] = values
+
+
+
+    def set_su(self, quantity_name, su):
+
+        index = self.quantities.index(quantity_name)
+    
+        # Ensure self.values is extended to the required length
+        if len(self.standard_uncertainties) <= index:
+            self.standard_uncertainties.extend(
+                [[]] * (index + 1 - len(self.standard_uncertainties))
+            )
+        
+        # Set the values at the desired index
+        self.standard_uncertainties[index] = su
