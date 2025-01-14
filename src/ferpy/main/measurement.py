@@ -59,6 +59,7 @@ class Measurement:
     @classmethod
     def from_dict(cls, data: dict):
         """Creates a Measurement instance from a dictionary."""
+        from .source import Source
         return cls(
             id=data.get("id"),
             description=data.get("description"),
