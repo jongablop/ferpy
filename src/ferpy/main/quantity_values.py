@@ -30,6 +30,17 @@ class QuantityValues:
         if self.id is None:
             self.id = str(uuid.uuid4())
 
+    def __eq__(self, other): 
+        if not isinstance(other, QuantityValues):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+
+       # Get all attributes as dictionaries, excluding 'id'
+        self_dict = {key: value for key, value in vars(self).items() if key != 'id'}
+        other_dict = {key: value for key, value in vars(other).items() if key != 'id'}
+
+        # Compare the dictionaries
+        return self_dict == other_dict
 
     def to_dict(self):
         return {
