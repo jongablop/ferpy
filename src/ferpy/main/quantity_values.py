@@ -1,6 +1,7 @@
 from typing import List, Optional
 from dataclasses import dataclass
 import uuid
+import json
 
 from ..auxiliary.changelog_entry import ChangelogEntry
 from ..auxiliary.coverage import Coverage
@@ -80,6 +81,19 @@ class QuantityValues:
             ],
             correlation_indices=data.get("correlation_indices")
         )
+    
+    @classmethod
+    def from_json(cls, json_str: str):
+        """Creates a QuantityValues instance from a JSON string."""
+        data = json.loads(json_str)
+        return cls.from_dict(data)
+
+    @classmethod
+    def load_from_file(cls, filepath: str):
+        """Loads a QuantityValues instance from a JSON file."""
+        with open(filepath, "r") as json_file:
+            data = json.load(json_file)
+        return cls.from_dict(data)
 
 
     def set_values(self, quantity_name, values):
