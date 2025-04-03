@@ -121,3 +121,23 @@ class QuantityValues:
         
         # Set the values at the desired index
         self.standard_uncertainties[index] = su
+
+    def __str__(self):
+        """
+        Returns a formatted string representation of the QuantityValues object.
+        If there is a single value (or a list with a single value), it returns:
+            symbol = (value ± standard_uncertainty) unit
+        """
+        if not self.symbols or not self.values or not self.units:
+            return "QuantityValues: Missing required data"
+
+        # Extract first symbol, value, uncertainty, and unit
+        symbol = self.symbols[0] if self.symbols else "?"
+        unit = self.units[0] if self.units else "?"
+
+        if len(self.values) == 1 and len(self.values[0]) == 1:
+            value = self.values[0][0]
+            uncertainty = self.standard_uncertainties[0][0] if self.standard_uncertainties else 0
+            return rf"${symbol} = ({value} \pm {uncertainty}) \, {unit}$"
+
+        return f"QuantityValues: {self.name or 'Unnamed'}"

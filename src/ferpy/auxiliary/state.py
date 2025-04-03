@@ -36,3 +36,8 @@ class State:
         with open(filepath, "r") as json_file:
             data = json.load(json_file)
         return cls.from_dict(data)
+    
+    def __str__(self):
+        if self.quantity_value is None:
+            return f"{self.name}: {self.description}"
+        return str(self.quantity_value)  # Placeholder for next steps
