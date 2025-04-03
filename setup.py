@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ferpy",
-    version="0.1.14",
+    version="0.1.15",
     author="Jon Gabirondo-López",
     author_email="jon.gabirondol@ehu.eus",
     description="A Python implementation of the FER data structure.",
