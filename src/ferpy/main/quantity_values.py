@@ -138,6 +138,6 @@ class QuantityValues:
         if len(self.values) == 1 and len(self.values[0]) == 1:
             value = self.values[0][0]
             uncertainty = self.standard_uncertainties[0][0] if self.standard_uncertainties else 0
-            return rf"${symbol} = ({value} \pm {uncertainty}) \, {unit}$"
+            return rf"{symbol} = ({value} \pm {uncertainty}) \, {unit}"
 
         return f"QuantityValues: {self.name or 'Unnamed'}"
